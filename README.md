@@ -30,8 +30,7 @@ system.package.updates.security
 ```sh
 git clone https://github.com/konstruktoid/datadog-package-updates
 cd datadog-package-updates/
-sudo cp checks.d/package_updates.py /etc/datadog-agent/checks.d/
-sudo cp -R conf.d/package_updates.d/ /etc/datadog-agent/conf.d/
+sudo cp -vnR checks.d/ conf.d/ /etc/datadog-agent/
 sudo chown -R dd-agent:dd-agent /etc/datadog-agent/conf.d/package_updates.d/
 sudo chown -R dd-agent:dd-agent /etc/datadog-agent/checks.d/package_updates.py
 sudo systemctl restart datadog-agent
