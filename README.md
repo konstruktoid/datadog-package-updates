@@ -2,6 +2,13 @@
 
 This plugin sends metrics regarding package updates to a DataDog instance.
 
+```console
+Work in progress.
+```
+
+Currently only supporting [Ubuntu](https://ubuntu.com/) and Linux distributions
+using `/usr/lib/update-notifier/apt_check.py`.
+
 ## Metrics
 
 [https://docs.datadoghq.com/metrics/agent_metrics_submission/?tab=gauge](https://docs.datadoghq.com/metrics/agent_metrics_submission/?tab=gauge)
