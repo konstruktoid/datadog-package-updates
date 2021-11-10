@@ -2,6 +2,8 @@
 
 This plugin sends metrics regarding package updates to a DataDog instance.
 
+![DataDog Package Updates](images/dd-package-updates.png "DataDog Package Updates")
+
 ```console
 Work in progress.
 ```
