@@ -1,6 +1,7 @@
 # Package Updates DataDog agent Plugin
 
-This plugin sends metrics regarding package updates to a DataDog instance.
+This plugin sends metrics regarding package updates and reboot status
+to a DataDog instance.
 
 ![DataDog Package Updates](images/dd-package-updates.png "DataDog Package Updates")
 
@@ -11,6 +12,9 @@ Work in progress.
 Currently only supporting [Ubuntu](https://ubuntu.com/) and Linux distributions
 using `/usr/lib/update-notifier/apt_check.py`.
 
+If `/var/run/reboot-required` is present, `system.reboot.required` will be set
+to `1`.
+
 ## Metrics
 
 [https://docs.datadoghq.com/metrics/agent_metrics_submission/?tab=gauge](https://docs.datadoghq.com/metrics/agent_metrics_submission/?tab=gauge)
@@ -18,6 +22,7 @@ using `/usr/lib/update-notifier/apt_check.py`.
 ```console
 system.package.updates
 system.package.updates.security
+system.reboot.required
 ```
 
 ## Files
