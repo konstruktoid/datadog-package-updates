@@ -9,11 +9,15 @@ to a DataDog instance.
 Work in progress.
 ```
 
-Currently only supporting [Ubuntu](https://ubuntu.com/) and Linux distributions
-using `/usr/lib/update-notifier/apt_check.py`.
+If `/usr/lib/update-notifier/apt_check.py` is available, the output will be used
+to set `system.package.updates` and `system.package.updates.security`.
 
 If `/var/run/reboot-required` is present, `system.reboot.required` will be set
 to `1`.
+
+If `lsb_release` is available and the distribution is [Ubuntu](https://ubuntu.com/),
+the release number will be used to calculate if the release if end-of-life and
+`system.release.eol` will be set.
 
 ## Metrics
 
@@ -23,6 +27,7 @@ to `1`.
 system.package.updates
 system.package.updates.security
 system.reboot.required
+system.release.eol
 ```
 
 ## Files
