@@ -5,7 +5,7 @@ https://docs.datadoghq.com/metrics/agent_metrics_submission/?tab=gauge
 """
 
 import os
-import subprocess
+import subprocess  # nosec B404
 import sys
 import datetime
 import shutil
@@ -30,7 +30,7 @@ class PackageUpdates(AgentCheck):
             if os.path.isfile(lsb_release):
                 lsb_process = subprocess.run(
                     [lsb_release, "-rsd"],
-                    shell=False,
+                    shell=False,  # nosec B603
                     stdout=subprocess.PIPE,
                     check=True,
                     stderr=subprocess.STDOUT,
@@ -67,7 +67,7 @@ class PackageUpdates(AgentCheck):
             if os.path.isfile(UBUNTU_APT_CHECK):
                 query_process = subprocess.run(
                     UBUNTU_APT_CHECK,
-                    shell=False,
+                    shell=False,  # nosec B603
                     stdout=subprocess.PIPE,
                     check=True,
                     stderr=subprocess.STDOUT,
