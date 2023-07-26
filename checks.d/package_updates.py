@@ -43,7 +43,7 @@ class PackageUpdates(AgentCheck):
                 lsb_release = lsb_output[1]
 
                 if lsb_distribution == "Ubuntu":
-                    release_year = "20" + list(lsb_release.split("."))[0].strip()
+                    release_year = "20" + next(iter(lsb_release.split("."))).strip()
                     release_month = list(lsb_release.split("."))[1].strip()
                     release_date = datetime.datetime(
                         int(release_year),
@@ -72,7 +72,7 @@ class PackageUpdates(AgentCheck):
                     stderr=subprocess.STDOUT,
                     text=True,
                 )
-                package_updates = list(query_process.stdout.split(";"))[0]
+                package_updates = next(iter(query_process.stdout.split(";")))
                 package_updates_security = list(query_process.stdout.split(";"))[1]
 
             reboot_required = 1 if os.path.isfile(UBUNTU_REBOOT_REQUIRED) else 0
