@@ -22,7 +22,7 @@ __version__ = "0.0.4"
 class PackageUpdates(AgentCheck):
     """The PackageUpdates class."""
 
-    def check(self, instance):  # noqa=ARG002
+    def check(self, instance):  # noqa: ARG002
         """Return the number of available updates."""
 
         try:
@@ -31,7 +31,7 @@ class PackageUpdates(AgentCheck):
             if os.path.isfile(lsb_release):
                 lsb_process = subprocess.run(
                     [lsb_release, "-rsd"],
-                    shell=False,  # noqa=S603
+                    shell=False,  # noqa: S603
                     stdout=subprocess.PIPE,
                     check=True,
                     stderr=subprocess.STDOUT,
@@ -66,7 +66,7 @@ class PackageUpdates(AgentCheck):
             if os.path.isfile(UBUNTU_APT_CHECK):
                 query_process = subprocess.run(
                     UBUNTU_APT_CHECK,
-                    shell=False,  # noqa=S603
+                    shell=False,  # noqa: S603
                     stdout=subprocess.PIPE,
                     check=True,
                     stderr=subprocess.STDOUT,
@@ -77,7 +77,7 @@ class PackageUpdates(AgentCheck):
 
             reboot_required = 1 if os.path.isfile(UBUNTU_REBOOT_REQUIRED) else 0
 
-        except Exception as exception_string:  # noqa=BLE001
+        except Exception as exception_string:  # noqa: BLE001
             print("Exception: ", str(exception_string), file=sys.stderr)
             sys.exit(1)
 
@@ -106,6 +106,6 @@ class PackageUpdates(AgentCheck):
                 tags=["metric_submission_type:gauge"],
             )
 
-        except Exception as exception_string:  # noqa=BLE001
+        except Exception as exception_string:  # noqa: BLE001
             print("Exception: ", str(exception_string), file=sys.stderr)
             sys.exit(1)
