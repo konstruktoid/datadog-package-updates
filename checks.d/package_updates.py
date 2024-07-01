@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""
-Send metrics regarding package updates to DataDog.
-https://docs.datadoghq.com/metrics/agent_metrics_submission/?tab=gauge
+"""Send metrics regarding package updates to DataDog.
+
+See https://docs.datadoghq.com/metrics/agent_metrics_submission/?tab=gauge.
 """
 
 import os
@@ -24,7 +24,6 @@ class PackageUpdates(AgentCheck):
 
     def check(self, instance):  # noqa: ARG002
         """Return the number of available updates."""
-
         try:
             lsb_release = shutil.which("lsb_release")
 
