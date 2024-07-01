@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""
-Send metrics regarding package updates to DataDog.
-https://docs.datadoghq.com/metrics/agent_metrics_submission/?tab=gauge
+"""Send metrics regarding package updates to DataDog.
+
+See https://docs.datadoghq.com/metrics/agent_metrics_submission/?tab=gauge.
 """
 
 import os
@@ -24,14 +24,13 @@ class PackageUpdates(AgentCheck):
 
     def check(self, instance):  # noqa: ARG002
         """Return the number of available updates."""
-
         try:
             lsb_release = shutil.which("lsb_release")
 
             if os.path.isfile(lsb_release):
-                lsb_process = subprocess.run(
+                lsb_process = subprocess.run(  # noqa: S603
                     [lsb_release, "-rsd"],
-                    shell=False,  # noqa: S603
+                    shell=False,
                     stdout=subprocess.PIPE,
                     check=True,
                     stderr=subprocess.STDOUT,
@@ -64,9 +63,9 @@ class PackageUpdates(AgentCheck):
                         release_eol = None
 
             if os.path.isfile(UBUNTU_APT_CHECK):
-                query_process = subprocess.run(
+                query_process = subprocess.run(  # noqa: S603
                     UBUNTU_APT_CHECK,
-                    shell=False,  # noqa: S603
+                    shell=False,
                     stdout=subprocess.PIPE,
                     check=True,
                     stderr=subprocess.STDOUT,
