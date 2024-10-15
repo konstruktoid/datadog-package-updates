@@ -1,14 +1,15 @@
 #!/usr/bin/python3
+# ruff: noqa: T201
 """Send metrics regarding package updates to DataDog.
 
 See https://docs.datadoghq.com/metrics/agent_metrics_submission/?tab=gauge.
 """
 
-import os
 import shutil
 import subprocess
 import sys
 from datetime import datetime, timezone
+from pathlib import Path
 
 from checks import AgentCheck
 from dateutil.relativedelta import relativedelta
@@ -22,12 +23,12 @@ __version__ = "0.0.4"
 class PackageUpdates(AgentCheck):
     """The PackageUpdates class."""
 
-    def check(self, instance):  # noqa: ARG002
+    def check(self, instance: str) -> any: # noqa: ARG002
         """Return the number of available updates."""
         try:
             lsb_release = shutil.which("lsb_release")
 
-            if os.path.isfile(lsb_release):
+            if Path(lsb_release).is_file():
                 lsb_process = subprocess.run(  # noqa: S603
                     [lsb_release, "-rsd"],
                     shell=False,
@@ -62,7 +63,7 @@ class PackageUpdates(AgentCheck):
                     else:
                         release_eol = None
 
-            if os.path.isfile(UBUNTU_APT_CHECK):
+            if Path(UBUNTU_APT_CHECK).is_file():
                 query_process = subprocess.run(  # noqa: S603
                     UBUNTU_APT_CHECK,
                     shell=False,
@@ -74,7 +75,7 @@ class PackageUpdates(AgentCheck):
                 package_updates = next(iter(query_process.stdout.split(";")))
                 package_updates_security = list(query_process.stdout.split(";"))[1]
 
-            reboot_required = 1 if os.path.isfile(UBUNTU_REBOOT_REQUIRED) else 0
+            reboot_required = 1 if Path(UBUNTU_REBOOT_REQUIRED).is_file() else 0
 
         except Exception as exception_string:  # noqa: BLE001
             print("Exception: ", str(exception_string), file=sys.stderr)
