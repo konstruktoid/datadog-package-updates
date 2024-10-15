@@ -23,7 +23,7 @@ __version__ = "0.0.4"
 class PackageUpdates(AgentCheck):
     """The PackageUpdates class."""
 
-    def check(self, instance: str) -> any: # noqa: ARG002
+    def check(self, instance: str) -> any:  # noqa: ARG002
         """Return the number of available updates."""
         try:
             lsb_release = shutil.which("lsb_release")
